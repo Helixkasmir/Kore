@@ -1,0 +1,15 @@
+green = (34,139,34)
+ิbrown = (34,139,34)
+gold = (218,165,32)
+
+def health_bar(health, x, y):        #สร้างฟังก์ชัน health_bar
+    ratio = health / 100             #อัตราส่วนของค่า(health) โดยหารด้วย 100 เพื่อปรับสเกลให้เข้ากับความยาวของแถบแสดง
+    pygame.rect(screen, gold, (x - 2, y - 2, 405, 35))       #สร้างกรอบของแถบแสดง
+    pygame.rect(screen, green, (x, y, 400, 30))              #หลอดเลือด
+    pygame.rect(screen, brown, (x, y, 400 * ratio, 30))
+
+
+
+    #ใช้ฟังก์ชัน health_bar เพื่อแสดงแถบแสดง health ของผู้เล่น 2 คน
+    health_bar(fighter_1.health, 20, 20)
+    health_bar(fighter_2.health, 20, 20)
