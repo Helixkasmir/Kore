@@ -1,0 +1,65 @@
+import pygame
+import sys
+
+pygame.init()
+
+# กำหนดขนาดหน้าต่าง
+screen_width = 1280
+screen_height = 720
+
+# โหลดรูปภาพ
+original_image = pygame.image.load('95.gif')
+image = pygame.transform.scale(original_image, (screen_width, screen_height))
+
+# สร้างหน้าต่าง Pygame ขนาด 1000x600
+screen = pygame.display.set_mode((screen_width, screen_height))
+
+pygame.display.set_caption("Project X")
+
+# สร้างตัวแปรสำหรับเลือก start หรือ quit
+selected_option = "start"
+
+# กำหนดฟอนต์และขนาดตัวอักษร
+font = pygame.font.Font(None, 40)
+
+# สร้างข้อความ "Start" และ "Quit"
+start_text = font.render("Start", True, (255, 255, 255))
+quit_text = font.render("Quit", True, (255, 255, 255))
+
+# เริ่มต้นหน้าต่าง pygame
+run = True
+color_change_timer = 0  # ตัวแปรเพื่อติดเวลาในการสลับสี
+selected_color = (255, 0, 0)  # สีที่ถูกเลือกในขณะนี้
+
+while run:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+
+    screen.fill((0, 0, 0))
+    screen.blit(image, (0, 0))
+
+    if selected_option == "start":
+        pygame.draw.rect(screen, selected_color, (580, 440, 100, 50), 5)
+        screen.blit(start_text, (600, 450))
+        screen.blit(quit_text, (600, 500))
+    else:
+        pygame.draw.rect(screen, selected_color, (580, 490, 100, 50), 5)
+        screen.blit(start_text, (600, 450))
+        screen.blit(quit_text, (600, 500))
+
+    pygame.display.update()
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_UP] or keys[pygame.K_w]:
+        selected_option = "start"
+    elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
+        selected_option = "quit"
+
+    if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
+        if selected_option == "quit":
+            break  # ออกจากลูปเมื่อกด Enter
+        elif selected_option == "start":
+            import Test2
+
+pygame.quit()  # สิ้นสุดโปรแกรม Pygame
